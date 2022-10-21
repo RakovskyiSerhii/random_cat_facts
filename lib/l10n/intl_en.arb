@@ -1,3 +1,7 @@
 {
-  "@@locale": "en"
+  "@@locale": "en",
+  "anotherFact": "Another fact!",
+  "factHistory": "Fact history",
+  "catImageUrl": "https://cataas.com/cat",
+  "randomFact": "Random fact"
 }
