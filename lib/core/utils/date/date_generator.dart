@@ -4,6 +4,7 @@ import 'package:random_cat_facts/core/utils/date/date_format.dart';
 
 const int firstYear = 1970;
 
+/// generate a random date from 1970 to 2040
 class DateGenerator {
   DateGenerator._();
 
