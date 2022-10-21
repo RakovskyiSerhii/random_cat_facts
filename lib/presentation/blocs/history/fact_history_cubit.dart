@@ -13,7 +13,7 @@ class FactHistoryCubit extends Cubit<FactHistoryState> {
   }
 
   void getHistory() {
-    Future.delayed(Duration(milliseconds: 500), () {
+    Future.delayed(const Duration(milliseconds: 500), () {
       final localFacts = _getLocalFactsUseCase.invoke();
       emit(state.copyWith(history: localFacts));
     });

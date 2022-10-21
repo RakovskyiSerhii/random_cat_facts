@@ -28,7 +28,6 @@ class FactCubit extends Cubit<FactState> with FailureMixin {
 
   @override
   void processFailure(Failure failure) {
-    print(failure);
     failure.map(
       networkConnection: (value) =>
           emit(state.copyWith(event: FactEvent.noConnection())),
