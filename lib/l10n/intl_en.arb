@@ -3,5 +3,7 @@
   "anotherFact": "Another fact!",
   "factHistory": "Fact history",
   "catImageUrl": "https://cataas.com/cat",
-  "randomFact": "Random fact"
+  "randomFact": "Random fact",
+  "getNewFact": "Get new fact",
+  "noSavedFacts": "No saved facts"
 }

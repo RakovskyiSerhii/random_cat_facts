@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +8,7 @@ import 'package:random_cat_facts/extension/context_extension.dart';
 import 'package:random_cat_facts/generated/assets/assets.gen.dart';
 import 'package:random_cat_facts/presentation/blocs/fact/fact_cubit.dart';
 import 'package:random_cat_facts/presentation/blocs/fact/fact_state.dart';
+import 'package:random_cat_facts/presentation/router/app_router.dart';
 import 'package:random_cat_facts/presentation/widgets/buttons/app_text_button.dart';
 import 'package:random_cat_facts/presentation/widgets/fact_widget.dart';
 
@@ -24,7 +26,15 @@ class FactView extends StatelessWidget {
               title: Text(context.localizations.randomFact),
               actions: [
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context
+                          .pushRoute(const FactHistoryViewRoute())
+                          .then((value) {
+                        if (value == true) {
+                          context.factCubit.getNextFact();
+                        }
+                      });
+                    },
                     icon: const Icon(
                       Icons.history,
                       color: Colors.white,
@@ -65,9 +75,9 @@ class FactView extends StatelessWidget {
 
   Widget _buildFact(BuildContext context, FactModel model) {
     return LayoutBuilder(
-      builder: (p0, p1) {
+      builder: (_, constraints) {
         return ConstrainedBox(
-          constraints: BoxConstraints(minHeight: p1.maxHeight),
+          constraints: BoxConstraints(minHeight: constraints.maxHeight),
           child: SingleChildScrollView(
             child: FactWidget(
               factModel: model,

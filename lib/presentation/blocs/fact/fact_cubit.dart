@@ -11,11 +11,11 @@ class FactCubit extends Cubit<FactState> with FailureMixin {
   final GetFactUseCase _getFactUseCase = GetIt.instance.get();
 
   FactCubit() : super(FactState()) {
-    getNextFact();
+    getNextFact(forceLoad: true);
   }
 
-  void getNextFact() {
-    if (state.isLoading) return;
+  void getNextFact({bool forceLoad = false}) {
+    if (!forceLoad && state.isLoading) return;
     emit(state.copyWith(factModel: null));
     Future.delayed(const Duration(milliseconds: 500), () {
       _getFactUseCase.invoke().then(_updateFact).catchError(handleFailure);
@@ -28,6 +28,7 @@ class FactCubit extends Cubit<FactState> with FailureMixin {
 
   @override
   void processFailure(Failure failure) {
+    print(failure);
     failure.map(
       networkConnection: (value) =>
           emit(state.copyWith(event: FactEvent.noConnection())),

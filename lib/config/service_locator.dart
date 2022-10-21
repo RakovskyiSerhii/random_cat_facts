@@ -9,7 +9,10 @@ import 'package:random_cat_facts/data/mapper/fact_entity_to_model_mapper.dart';
 import 'package:random_cat_facts/data/mapper/fact_model_to_entity_mapper.dart';
 import 'package:random_cat_facts/data/network/api/cat_api.dart';
 import 'package:random_cat_facts/data/network/repository/repository.dart';
+import 'package:random_cat_facts/domain/clear_local_storage_use_case.dart';
 import 'package:random_cat_facts/domain/get_fact_use_case.dart';
+import 'package:random_cat_facts/domain/get_local_facts_use_case.dart';
+import 'package:random_cat_facts/presentation/router/app_router.dart';
 
 class ServiceLocator {
   ServiceLocator._();
@@ -20,6 +23,7 @@ class ServiceLocator {
     _configNetwork(getIt);
     _configMappers(getIt);
     _configUseCase(getIt);
+    _configRouter(getIt);
   }
 
   static void _configUseCase(GetIt getIt) {
@@ -28,6 +32,11 @@ class ServiceLocator {
           getIt.get(),
           getIt.get(),
         ));
+    getIt.registerFactory(() => GetLocalFactsUseCase(
+          getIt.get(),
+          getIt.get(),
+        ));
+    getIt.registerFactory(() => ClearLocalStorageUseCase(getIt.get()));
   }
 
   static void _configMappers(GetIt getIt) {
@@ -59,5 +68,9 @@ class ServiceLocator {
     Hive.registerAdapter<FactEntity>(FactEntityAdapter());
     final box = await Hive.openBox<FactEntity>(Constants.factsBoxName);
     getIt.registerSingleton(box);
+  }
+
+  static void _configRouter(GetIt getIt) {
+    getIt.registerSingleton(AppRouter());
   }
 }
