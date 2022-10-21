@@ -1,0 +1,54 @@
+name: random_cat_facts
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  hive: ^2.2.3
+  flutter_bloc: ^8.1.1
+  freezed: ^2.2.0
+  retrofit: ^3.3.1
+  json_annotation: ^4.7.0
+  freezed_annotation: ^2.2.0
+  flutter_gen_runner: ^5.0.3
+  lottie: ^1.4.3
+  intl: ^0.17.0
+  pretty_dio_logger: ^1.1.1
+  get_it: ^7.2.0
+  dio: ^4.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  build_runner: ^2.3.2
+  json_serializable: ^6.5.3
+  retrofit_generator: '>=4.0.0 <5.0.0'
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/colors/
+    - assets/lottie/
+
+flutter_gen:
+  output: lib/generated/assets/
+  integrations:
+    lottie: true
+
+  colors:
+    inputs:
+      - assets/colors/colors.xml
+
+flutter_intl:
+  enabled: true
+  class_name: AppLocalizations
